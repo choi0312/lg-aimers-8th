@@ -2,10 +2,6 @@
 
 LG Aimers 8기 **모델 경량화 온라인 해커톤**에서 사용한 EXAONE-4.0-1.2B 기반 LLM 경량화 파이프라인입니다.
 
-| 주제 | LLM 경량화, Large Language Model Compression |
-| 기본 모델 | LGAI-EXAONE/EXAONE-4.0-1.2B |
-| 리더보드 기록 | 0.63147 |
-| 대회 링크 | https://dacon.io/competitions/official/236673/overview/description |
 
 ## 1. 프로젝트 개요
 
