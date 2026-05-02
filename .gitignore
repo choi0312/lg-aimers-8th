@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# Model artifacts
+model/
+submit/
+submit.zip
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.gguf
+
+# Calibration / outputs
+calibration_artifacts/
+outputs/
+logs/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+.env
+*.key
+token.txt
+github_token.txt
+hf_token.txt

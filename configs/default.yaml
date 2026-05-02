@@ -1,0 +1,65 @@
+project:
+  name: lg_aimers_8th
+  seed: 2026
+  work_dir: /content/work_w8a8_static_ptq
+  model_out_dir: /content/model
+  submit_zip_local: /content/submit.zip
+  submit_zip_drive: /content/drive/MyDrive/submit.zip
+
+model:
+  model_id: LGAI-EXAONE/EXAONE-4.0-1.2B
+  trust_remote_code: true
+  torch_dtype: auto
+  device_map: auto
+  ignore_linear:
+    - lm_head
+
+calibration:
+  max_seq_len: 1024
+  num_samples: 512
+  output_dir: /content/drive/MyDrive/calibration_artifacts
+  jsonl_name: calib_prompts_mix512_len1024_komt80_kmmlu278.jsonl
+  meta_name: calib_meta_mix512_len1024_komt80_kmmlu278.json
+  counts:
+    manta: 77
+    kmmlu: 278
+    gsm8k: 77
+    komt: 80
+  datasets:
+    manta:
+      path: LGAI-EXAONE/MANTA-1M
+      name: MANTA_1M
+      split: train
+      streaming: true
+    kmmlu:
+      path: LGAI-EXAONE/KMMLU-Redux
+      name: kmmlu_redux
+      split: test
+      streaming: false
+    gsm8k:
+      path: gsm8k
+      name: main
+      split: train
+      streaming: false
+    komt:
+      path: LGAI-EXAONE/KoMT-Bench
+      name: default
+      split: train
+      streaming: false
+
+quantization:
+  ptq_mode: minmax
+  scheme_candidates:
+    - W8A8-INT8
+    - INT8_W8A8
+    - W8A8
+  save_compressed: true
+
+sanity:
+  enabled: true
+  max_new_tokens: 64
+  eos_token_id: 361
+  prompts:
+    - 안녕하세요. 한 문장으로 자기소개 해줘.
+    - 다음 수학 문제를 풀어줘: 28*37=? 정답만.
+    - 아래 문장을 영어로 번역해줘: 오늘 날씨가 정말 좋다.
