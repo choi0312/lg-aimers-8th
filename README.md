@@ -2,17 +2,8 @@
 
 LG Aimers 8기 **모델 경량화 온라인 해커톤**에서 사용한 EXAONE-4.0-1.2B 기반 LLM 경량화 파이프라인입니다.
 
-본 저장소는 기존 Colab 노트북을 그대로 업로드하지 않고, calibration dataset 구성, 모델 로딩, W8A8 static PTQ, sanity check, 제출용 `submit.zip` 생성 과정을 모듈형 Python 프로젝트로 재구성한 버전입니다.
-
-## Competition Result
-
-| 항목 | 내용 |
-|---|---|
-| 대회명 | Aimers 8기 : 모델 경량화 온라인 해커톤 |
-| 플랫폼 | DACON |
 | 주제 | LLM 경량화, Large Language Model Compression |
 | 기본 모델 | LGAI-EXAONE/EXAONE-4.0-1.2B |
-| 제출 형식 | HuggingFace 표준 모델 디렉토리를 `submit.zip/model/` 구조로 제출 |
 | 리더보드 기록 | 0.63147 |
 | 대회 링크 | https://dacon.io/competitions/official/236673/overview/description |
 
@@ -20,7 +11,7 @@ LG Aimers 8기 **모델 경량화 온라인 해커톤**에서 사용한 EXAONE-4
 
 본 프로젝트는 EXAONE-4.0-1.2B 모델을 대상으로, 성능 저하를 최소화하면서 추론 효율을 개선하기 위한 post-training quantization 기반 경량화 파이프라인입니다.
 
-대회 평가 환경에서는 참가자의 코드가 직접 실행되는 것이 아니라, 제출된 HuggingFace 표준 모델 가중치와 설정 파일이 운영진의 고정 vLLM 추론 환경에서 실행됩니다. 따라서 본 프로젝트는 모델 가중치와 config 수준에서 호환 가능한 결과물을 생성하는 데 초점을 둡니다.
+HuggingFace 표준 모델 가중치와 설정 파일이 고정 vLLM 추론 환경에서 실행됩니다. 따라서 본 프로젝트는 모델 가중치와 config 수준에서 호환 가능한 결과물을 생성하는 데 초점을 둡니다.
 
 ## 2. 접근 전략
 
@@ -112,9 +103,3 @@ python scripts/package_submit.py --model_dir /content/model --zip_path /content/
 └─ model/
 </pre>
 
-## 7. 주의사항
-
-- 본 저장소에는 실제 모델 가중치와 submit.zip을 포함하지 않습니다.
-- 모델 파일은 용량이 크므로 GitHub에는 업로드하지 않고, 실행 환경에서 생성한 뒤 대회 제출용 zip으로 관리합니다.
-- 평가 서버는 인터넷 접속이 불가능하므로 제출 zip 내부의 `model/`만으로 tokenizer와 model이 모두 로드 가능해야 합니다.
-- vLLM 라이브러리 자체 수정은 온라인 해커톤 조건에서 허용되지 않으므로, 모델 가중치와 config 수준의 결과물만 생성합니다.
